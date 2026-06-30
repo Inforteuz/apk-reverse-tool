@@ -8,6 +8,9 @@
     "dev": "concurrently -k \"vite\" \"sleep 1.5 && electron . --dev\"",
     "build": "vite build",
     "dist": "npm run build && electron-builder --mac dmg",
+    "dist:mac": "npm run build && electron-builder --mac dmg",
+    "dist:win": "npm run build && electron-builder --win zip",
+    "dist:all": "npm run build && electron-builder --mac dmg --win zip",
     "dist:dir": "npm run build && electron-builder --mac dir"
   },
   "build": {
@@ -26,6 +29,17 @@
           "arch": [
             "x64",
             "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
           ]
         }
       ]
