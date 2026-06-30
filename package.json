@@ -1,0 +1,75 @@
+{
+  "name": "apk-reverse-tool",
+  "version": "1.2.0",
+  "description": "Professional APK/XAPK reverse engineering tool for macOS",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently -k \"vite\" \"sleep 1.5 && electron . --dev\"",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder --mac dmg",
+    "dist:dir": "npm run build && electron-builder --mac dir"
+  },
+  "build": {
+    "appId": "com.reversetool.apkanalyzer",
+    "productName": "APK Reverse Tool",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "APK Reverse Tool",
+      "icon": "build/icon.icns",
+      "window": {
+        "width": 600,
+        "height": 400
+      }
+    },
+    "files": [
+      "src/main.js",
+      "src/preload.js",
+      "src/core/**/*",
+      "dist-renderer/**/*",
+      "assets/**/*",
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "dependencies": {
+    "framer-motion": "^12.42.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^1.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.2",
+    "concurrently": "^9.2.3",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0"
+  },
+  "author": "APK Reverse Tool",
+  "license": "MIT"
+}

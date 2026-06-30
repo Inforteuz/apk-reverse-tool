@@ -1,0 +1,457 @@
+@import "tailwindcss";
+
+/* ─── Theme tokens — macOS Dark inspired ───────────────────────────────── */
+@theme {
+  --color-bg:        #1c1c1e;
+  --color-bg-1:      #2c2c2e;
+  --color-bg-2:      #1c1c1e;
+  --color-bg-3:      #242426;
+  --color-surface:   rgba(255, 255, 255, 0.04);
+  --color-surface-2: rgba(255, 255, 255, 0.06);
+  --color-border:    rgba(255, 255, 255, 0.08);
+  --color-border-2:  rgba(255, 255, 255, 0.12);
+
+  --color-primary:        #0a84ff;
+  --color-primary-light:  #5eb6ff;
+  --color-primary-dark:   #0060df;
+  --color-accent:         #5e5ce6;
+
+  --color-success:        #30d158;
+  --color-warning:        #ff9f0a;
+  --color-danger:         #ff453a;
+  --color-critical:       #ff3b30;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #1c1c1e;
+  color: #e5e5e7;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+input, textarea, [data-selectable], .selectable, pre, code {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* macOS title bar drag region */
+.drag-region { -webkit-app-region: drag; }
+.no-drag     { -webkit-app-region: no-drag; }
+
+/* ─── Surfaces ─────────────────────────────────────────────────────────── */
+.surface {
+  background: #2c2c2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.surface-1 {
+  background: #242426;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.surface-2 {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.surface-3 {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.divider {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* macOS sidebar (vibrancy-like) */
+.mac-sidebar {
+  background: #2c2c2e;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* macOS topbar */
+.mac-topbar {
+  background: rgba(44, 44, 46, 0.85);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Scrollbar — thin like macOS ──────────────────────────────────────── */
+::-webkit-scrollbar           { width: 8px; height: 8px; }
+::-webkit-scrollbar-track     { background: transparent; }
+::-webkit-scrollbar-thumb     {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+  background-clip: content-box;
+}
+
+/* ─── Animations ───────────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.25s ease-out both; }
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scale-in 0.2s ease-out both; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.3s ease-out both; }
+
+/* macOS native-style loader spinner */
+@keyframes mac-spinner {
+  0%   { opacity: 0.85; }
+  100% { opacity: 0.15; }
+}
+
+.mac-spinner {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.mac-spinner > div {
+  position: absolute;
+  left: 6.5px;
+  top: 0;
+  width: 3px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 1.5px;
+  transform-origin: 1.5px 8px;
+  animation: mac-spinner 1s linear infinite;
+}
+.mac-spinner > div:nth-child(1)  { transform: rotate(0deg);   animation-delay: 0s; }
+.mac-spinner > div:nth-child(2)  { transform: rotate(30deg);  animation-delay: -0.917s; }
+.mac-spinner > div:nth-child(3)  { transform: rotate(60deg);  animation-delay: -0.833s; }
+.mac-spinner > div:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.75s; }
+.mac-spinner > div:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.667s; }
+.mac-spinner > div:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.583s; }
+.mac-spinner > div:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.5s; }
+.mac-spinner > div:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.417s; }
+.mac-spinner > div:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.333s; }
+.mac-spinner > div:nth-child(10) { transform: rotate(270deg); animation-delay: -0.25s; }
+.mac-spinner > div:nth-child(11) { transform: rotate(300deg); animation-delay: -0.167s; }
+.mac-spinner > div:nth-child(12) { transform: rotate(330deg); animation-delay: -0.083s; }
+.mac-spinner.lg { width: 28px; height: 28px; }
+.mac-spinner.lg > div { left: 11.5px; width: 5px; height: 9px; transform-origin: 2.5px 14px; border-radius: 2.5px; }
+
+/* Skeleton */
+@keyframes skeleton {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* Status dot */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+.status-dot.live {
+  background: #30d158;
+  box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.5);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.5); }
+  50%      { box-shadow: 0 0 0 4px rgba(48, 209, 88, 0); }
+}
+
+/* ─── Severity tokens — flat ────────────────────────────────────────────── */
+.sev-critical { color: #ff453a; background: rgba(255, 69, 58, 0.10); border-color: rgba(255, 69, 58, 0.22); }
+.sev-high     { color: #ff9f0a; background: rgba(255, 159, 10, 0.10); border-color: rgba(255, 159, 10, 0.22); }
+.sev-medium   { color: #ffd60a; background: rgba(255, 214, 10, 0.10); border-color: rgba(255, 214, 10, 0.22); }
+.sev-low      { color: #30d158; background: rgba(48, 209, 88, 0.10); border-color: rgba(48, 209, 88, 0.22); }
+
+/* HTTP method tokens — flat */
+.method-get    { color: #30d158; background: rgba(48, 209, 88, 0.10); border-color: rgba(48, 209, 88, 0.22); }
+.method-post   { color: #0a84ff; background: rgba(10, 132, 255, 0.10); border-color: rgba(10, 132, 255, 0.22); }
+.method-put    { color: #ff9f0a; background: rgba(255, 159, 10, 0.10); border-color: rgba(255, 159, 10, 0.22); }
+.method-delete { color: #ff453a; background: rgba(255, 69, 58, 0.10); border-color: rgba(255, 69, 58, 0.22); }
+.method-patch  { color: #bf5af2; background: rgba(191, 90, 242, 0.10); border-color: rgba(191, 90, 242, 0.22); }
+
+/* ─── Toast — macOS notification style ─────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #2c2c2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #e5e5e7;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  animation: toast-in 0.2s ease-out;
+  max-width: 340px;
+  backdrop-filter: blur(20px);
+}
+.toast.success { border-left: 3px solid #30d158; }
+.toast.error   { border-left: 3px solid #ff453a; }
+.toast.info    { border-left: 3px solid #0a84ff; }
+.toast.toast-out { animation: toast-out 0.2s ease-out forwards; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(12px); }
+}
+
+/* ─── macOS buttons ─────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+  background: #0a84ff;
+  color: #ffffff;
+  border-color: #0a84ff;
+}
+.btn-primary:hover:not(:disabled) { background: #007aff; }
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #e5e5e7;
+}
+.btn-secondary:hover:not(:disabled) { background: rgba(255, 255, 255, 0.10); }
+
+.btn-ghost {
+  background: transparent;
+  color: #a1a1a6;
+}
+.btn-ghost:hover:not(:disabled) { background: rgba(255, 255, 255, 0.06); color: #e5e5e7; }
+
+.btn-danger {
+  background: rgba(255, 69, 58, 0.10);
+  border-color: rgba(255, 69, 58, 0.22);
+  color: #ff453a;
+}
+.btn-danger:hover:not(:disabled) { background: rgba(255, 69, 58, 0.18); }
+
+/* ─── Inputs ────────────────────────────────────────────────────────────── */
+.input, .select, .textarea {
+  background: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #e5e5e7;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.input:focus, .select:focus, .textarea:focus {
+  border-color: #0a84ff;
+}
+.input::placeholder { color: #6e6e73; }
+
+/* Search input style */
+.search-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid transparent;
+  padding-left: 28px;
+}
+.search-input:focus {
+  background: #1c1c1e;
+  border-color: rgba(10, 132, 255, 0.4);
+}
+
+input:focus, textarea:focus, select:focus { outline: none; }
+
+/* Tab buttons */
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #a1a1a6;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.12s ease, color 0.12s ease;
+  width: 100%;
+  text-align: left;
+}
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e5e5e7;
+}
+.tab-btn.active {
+  background: rgba(10, 132, 255, 0.14);
+  color: #5eb6ff;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+.card-clickable { cursor: pointer; }
+
+/* Code blocks */
+.code-block {
+  font-family: 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  background: #161618;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #cbd5e1;
+}
+
+.mono {
+  font-family: 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+}
+
+/* Risk meter (segmented bar) */
+.risk-meter {
+  display: flex;
+  height: 4px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+.risk-meter > div { height: 100%; }
+
+/* Sidebar group label */
+.side-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #6e6e73;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 8px 4px;
+}
+
+/* Selectable */
+.selectable { user-select: text; -webkit-user-select: text; }
+
+/* Subtle separator */
+.h-rule {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  width: 100%;
+}
+
+/* Native progress bar */
+.mac-progress {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.mac-progress > div {
+  height: 100%;
+  background: #0a84ff;
+  transition: width 0.3s ease;
+}
+
+/* Segmented control (macOS) */
+.segment {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 7px;
+  padding: 2px;
+  gap: 0;
+}
+.segment > button {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #a1a1a6;
+  border-radius: 5px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.segment > button:hover { color: #e5e5e7; }
+.segment > button.active {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+
+/* Pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #a1a1a6;
+}
+
+/* Soft accent text */
+.text-muted   { color: #6e6e73; }
+.text-soft    { color: #98989e; }
+.text-default { color: #e5e5e7; }
